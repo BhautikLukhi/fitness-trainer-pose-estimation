@@ -8,11 +8,11 @@ from feedback.information import get_exercise_info
 from utils.draw_text_with_background import draw_text_with_background
 
 def main():
-    video_path = r"C:\Users\yakupzengin\Fitness-Trainer\data\dumbel-workout.mp4"
-    video_path = r"C:\Users\yakupzengin\Fitness-Trainer\data\squat.mp4"
-    video_path = r"C:\Users\yakupzengin\Fitness-Trainer\data\push_up.mp4"
+    #video_path = r"/Users/bhautik/Desktop/Workouts/Code/fitness-trainer-pose-estimation/data/dumbel-workout.mp4"
+    video_path = r"/Users/bhautik/Desktop/Workouts/Code/fitness-trainer-pose-estimation/data/squat.mp4"
+    #video_path = r"C:\Users\yakupzengin\Fitness-Trainer\data\push_up.mp4"
 
-    exercise_type = "push_up"  # Egzersiz türünü belirleyin ("hammer_curl", "squat", "push_up")
+    exercise_type = "squat"  # Egzersiz türünü belirleyin ("hammer_curl", "squat", "push_up")
 
     cap = cv2.VideoCapture(video_path)
     pose_estimator = PoseEstimator()
@@ -30,7 +30,7 @@ def main():
     exercise_info = get_exercise_info(exercise_type)
 
     fourcc = cv2.VideoWriter_fourcc(*'XVID')
-    output_file = r"C:\Users\yakupzengin\Fitness-Trainer\output\push-up.avi"
+    output_file = r"/Users/bhautik/Desktop/Workouts/Code/fitness-trainer-pose-estimation/data/squatFeedBack.mp4"
     fps = cap.get(cv2.CAP_PROP_FPS)
     frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
@@ -59,10 +59,11 @@ def main():
 
         draw_text_with_background(frame, f"Exercise: {exercise_info.get('name', 'N/A')}", (40, 50),
                                   cv2.FONT_HERSHEY_DUPLEX, 0.7, (255, 255, 255,), (118, 29, 14, 0.79), 1)
-        draw_text_with_background(frame, f"Reps: {exercise_info.get('reps', 0)}", (40, 80),
-                                  cv2.FONT_HERSHEY_DUPLEX, 0.7, (255, 255, 255,), (118, 29, 14, 0.79), 1)
-        draw_text_with_background(frame, f"Sets: {exercise_info.get('sets', 0)}", (40, 110),
+        draw_text_with_background(frame, f"Sets: {exercise_info.get('sets', 0)}", (40, 80),
                                   cv2.FONT_HERSHEY_DUPLEX, 0.7, (255, 255, 255,), (118, 29, 14, 0.79),1 )
+        #draw_text_with_background(frame, f"Reps: {exercise_info.get('reps', 0)}", (40, 80),
+        #                          cv2.FONT_HERSHEY_DUPLEX, 0.7, (255, 255, 255,), (118, 29, 14, 0.79), 1)
+        
 
         out.write(frame)
 

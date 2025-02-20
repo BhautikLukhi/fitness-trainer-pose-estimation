@@ -43,12 +43,16 @@ class Squat:
         angle_text_position_right = (knee_right[0] + 10, knee_right[1] - 10)
         cv2.putText(frame, f'Angle Right: {int(angle_right)}', angle_text_position_right, cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
 
+        # Display the current stage on screen
+        #stage_text_position = (50, 50)  # You can change the position if needed
+        #cv2.putText(frame, f'Stage: {self.stage}', stage_text_position, cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
+
         # Update exercise stage and counter
-        if angle > 170:
+        if angle > 160:
             self.stage = "Starting Position"
-        elif 90 < angle < 170 and self.stage == "Starting Position":
+        elif 90 < angle < 160 and self.stage == "Starting Position":
             self.stage = "Descent"
-        elif angle < 90 and self.stage == "Descent":
+        elif angle < 100 and self.stage == "Descent":
             self.stage = "Ascent"
             self.counter += 1
         return self.counter, angle, self.stage
